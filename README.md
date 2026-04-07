@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aura Calendar - Premium Wall Calendar Component
 
-## Getting Started
+A highly interactive, React-based web component inspired by physical wall calendars. Built for responsiveness and a premium user experience.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Wall Calendar Aesthetic**: Prominent hero image (dynamic per month) serving as a visual anchor.
+- **Day Range Selector**: Click to select a start date and an end date. The range is visually highlighted across the grid.
+- **Integrated Notes**:
+  - **Monthly Memo**: A general notes section for overall monthly goals.
+  - **Date-Specific Notes**: Attach detailed notes to specific dates or your selected range.
+- **Persistence**: Notes are automatically saved to `localStorage`.
+- **Animations**: Smooth "flipping" transitions between months and interactive hover effects using Framer Motion.
+- **Fully Responsive**: Graceful transition between desktop (side-by-side) and mobile (stacked) layouts.
+- **Modern Tech Stack**: React (Next.js), Vanilla CSS Modules, Lucide Icons, Date-fns.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 Tech Stack
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Framework**: Next.js 15 (App Router)
+- **Language**: JavaScript
+- **Styling**: Vanilla CSS Modules (no Tailwind for maximum design control)
+- **Icons**: Lucide React
+- **Animations**: Framer Motion
+- **Date Handling**: date-fns
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Getting Started
 
-## Learn More
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Open the app**:
+   Navigate to [http://localhost:3000](http://localhost:3000) to view the component.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
+- `src/components/Calendar`: Main component logic and styling.
+- `src/lib/utils.js`: Utility functions.
+- `public/assets`: Hero images and static assets.
+- `src/app/globals.css`: Global design tokens and resets.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Design Philosophy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The Aura Calendar brand focuses on "serenity and productivity." The UI uses muted gradients, glassmorphism, and a high-contrast date grid to ensure that while the aesthetics are "premium," the functional utility of the calendar remains the top priority.

@@ -1,0 +1,882 @@
+/* ============================================================
+   Calendar.module.css  –  Seasonal Wall Calendar
+   ============================================================ */
+
+/* ─── Wrapper ────────────────────────────────────────────────────── */
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.6),
+    0 30px 80px -20px rgba(0,0,0,0.22),
+    0 8px 20px -8px rgba(0,0,0,0.12);
+  background: var(--card-white);
+  backdrop-filter: blur(24px);
+  transition: box-shadow 0.6s ease;
+  animation: scaleIn 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* ─── Hero Panel ─────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 44%;
+  min-height: 680px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.heroImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.22,1,0.36,1),
+              opacity   0.6s ease;
+  will-change: transform;
+}
+
+.hero:hover .heroImg {
+  transform: scale(1.06);
+}
+
+/* Gradient overlay: left-edge rich fade */
+.heroGrad {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(0,0,0,0.55) 0%,
+    rgba(0,0,0,0.25) 55%,
+    transparent 100%
+  );
+  transition: background 0.8s ease;
+}
+
+/* Season badge top-right */
+.seasonBadge {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 100px;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+.seasonEmoji {
+  font-size: 1.1rem;
+}
+
+/* Navigation arrows */
+.navBtns {
+  position: absolute;
+  bottom: 28px;
+  right: 24px;
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+
+.navBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.navBtn:hover {
+  background: rgba(255,255,255,0.28);
+  border-color: rgba(255,255,255,0.5);
+  transform: scale(1.1);
+}
+
+/* Month / Year text block */
+.heroContent {
+  position: absolute;
+  bottom: 90px;
+  left: 32px;
+  z-index: 10;
+  color: #fff;
+}
+
+.heroYear {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 6px;
+}
+
+.heroMonth {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -2px;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  margin-bottom: 16px;
+}
+
+.heroMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+}
+
+/* Weather pill overlay */
+.weatherPill {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px;
+  padding: 6px 14px;
+  color: rgba(255,255,255,0.9);
+  font-size: 0.72rem;
+  font-weight: 600;
+  z-index: 10;
+}
+
+/* ─── Right Panel ────────────────────────────────────────────────── */
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 44px 36px;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.95) 0%,
+    rgba(255,255,255,0.82) 100%
+  );
+  backdrop-filter: blur(20px);
+  overflow-y: auto;
+  max-height: 680px;
+}
+
+/* ─── Panel Header ───────────────────────────────────────────────── */
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandIcon {
+  width: 44px;
+  height: 44px;
+  background: var(--col-primary);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 6px 20px var(--col-glow);
+  transition: background 0.6s ease, box-shadow 0.6s ease;
+}
+
+.brandName {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--col-text);
+  transition: color 0.6s ease;
+}
+
+.brandSub {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.todayBtn {
+  padding: 8px 18px;
+  border-radius: 100px;
+  background: var(--col-primary);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 18px var(--col-glow);
+  transition: all 0.25s ease;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.todayBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px var(--col-glow);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ─── Custom Dropdown ────────────────────────────────────────────── */
+.dropdown {
+  position: relative;
+}
+
+.dropdownTrigger {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 13px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.7);
+  border: 1.5px solid color-mix(in srgb, var(--col-primary) 25%, transparent);
+  color: var(--col-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+
+.dropdownTrigger:hover {
+  background: var(--col-secondary);
+  border-color: var(--col-primary);
+}
+
+.dropChevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 130px;
+  max-height: 220px;
+  overflow-y: auto;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid color-mix(in srgb, var(--col-primary) 18%, transparent);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  z-index: 100;
+  padding: 6px;
+}
+
+.dropdownMenu::-webkit-scrollbar { width: 4px; }
+.dropdownMenu::-webkit-scrollbar-thumb { background: var(--col-secondary); border-radius: 4px; }
+
+.dropdownItem {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--foreground);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dropdownItem:hover {
+  background: var(--col-secondary);
+  color: var(--col-primary);
+}
+
+.dropdownItemActive {
+  background: var(--col-primary) !important;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+/* ─── Two-column layout (grid + notes) ──────────────────────────── */
+.body {
+  display: flex;
+  gap: 36px;
+  flex: 1;
+}
+
+.gridCol {
+  flex: 1.5;
+  min-width: 0;
+}
+
+.notesCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 200px;
+}
+
+/* ─── Calendar Grid ──────────────────────────────────────────────── */
+.dayLabels {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.dayLabel {
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--col-primary);
+  padding: 4px 0 10px;
+  transition: color 0.6s ease;
+}
+
+/* Sunday label — warm coral tint */
+.daySundayLabel {
+  color: #e05c6a !important;
+  background: rgba(224, 92, 106, 0.08);
+  border-radius: 8px;
+}
+
+.dayGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+/* Sunday cell — soft holiday tint, overridden by selection states */
+.daySunday {
+  background: rgba(224, 92, 106, 0.07);
+  border-radius: 50%;
+  color: #c94a57;
+  font-weight: 700;
+}
+
+.daySunday:hover:not(.dayOut) {
+  background: rgba(224, 92, 106, 0.18) !important;
+  color: #c94a57 !important;
+  box-shadow: 0 4px 14px rgba(224, 92, 106, 0.25);
+}
+
+/* Day cell */
+.day {
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--foreground);
+  transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+  user-select: none;
+}
+
+.day:hover:not(.dayOut) {
+  background: var(--col-secondary);
+  color: var(--col-primary);
+  transform: scale(1.12);
+  box-shadow: 0 4px 14px var(--col-glow);
+}
+
+.dayOut {
+  opacity: 0.18;
+  cursor: default;
+  pointer-events: none;
+}
+
+.dayToday {
+  font-weight: 800;
+  color: var(--col-primary);
+}
+
+.dayToday::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  width: 5px;
+  height: 5px;
+  background: var(--col-primary);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Range states */
+.daySelected {
+  background: var(--col-primary) !important;
+  color: #fff !important;
+  border-radius: 50% !important;
+  box-shadow: 0 6px 20px var(--col-glow);
+  transform: scale(1.08);
+  z-index: 2;
+}
+
+.daySelected:hover {
+  transform: scale(1.12);
+}
+
+.dayInRange {
+  background: var(--col-range);
+  border-radius: 0;
+  color: var(--col-text);
+  transform: none;
+}
+
+.dayInRange:hover { transform: none; }
+
+.dayRangeStart {
+  border-radius: 50% 0 0 50%;
+}
+
+.dayRangeEnd {
+  border-radius: 0 50% 50% 0;
+}
+
+/* Single-day select keeps full circle */
+.daySingle {
+  border-radius: 50% !important;
+}
+
+/* Note dot */
+.noteDot {
+  position: absolute;
+  bottom: 5px;
+  width: 4px;
+  height: 4px;
+  background: var(--col-accent);
+  border-radius: 50%;
+  transition: background 0.6s ease;
+}
+
+/* ─── Selection summary ──────────────────────────────────────────── */
+.selBox {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--col-bg-from), var(--col-bg-to));
+  border: 1.5px dashed color-mix(in srgb, var(--col-primary) 40%, transparent);
+  transition: all 0.6s ease;
+}
+
+/* ─── Holiday legend row ─────────────────────────────────────────── */
+.legendRow {
+  display: flex;
+  gap: 14px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.selLabel {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--col-primary);
+  margin-bottom: 6px;
+  transition: color 0.6s ease;
+}
+
+.selValue {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--col-text);
+  transition: color 0.6s ease;
+}
+
+.selHint {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ─── Notes ──────────────────────────────────────────────────────── */
+/* Tab bar */
+.tabBar {
+  display: flex;
+  gap: 6px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 14px;
+  padding: 4px;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.tabActive {
+  background: #fff;
+  color: var(--col-primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  max-height: 480px;
+  padding-right: 2px;
+}
+
+.tabContent::-webkit-scrollbar { width: 4px; }
+.tabContent::-webkit-scrollbar-thumb { background: var(--col-secondary); border-radius: 4px; }
+
+/* Notes header */
+.notesHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--col-text);
+  transition: color 0.6s ease;
+}
+
+.noteCard {
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.9);
+  border: 1.5px solid color-mix(in srgb, var(--col-primary) 15%, transparent);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.6s ease;
+}
+
+.noteCardAccent {
+  border-left: 4px solid var(--col-primary);
+  background: color-mix(in srgb, var(--col-bg-from) 60%, white);
+}
+
+.noteLabel {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--col-primary);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.6s ease;
+}
+
+.noteTextarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--foreground);
+  min-height: 96px;
+}
+
+.noteTextarea::placeholder {
+  color: color-mix(in srgb, var(--text-muted) 60%, transparent);
+}
+
+.trashBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.trashBtn:hover { color: #ef4444; }
+
+.emptyNotes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  padding: 28px 18px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.5);
+  border: 1.5px dashed color-mix(in srgb, var(--text-muted) 35%, transparent);
+  animation: float 4s ease-in-out infinite;
+}
+
+.emptyIcon {
+  width: 48px;
+  height: 48px;
+  background: var(--col-secondary);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--col-primary);
+  transition: all 0.6s ease;
+}
+
+.emptyText {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  max-width: 160px;
+  text-align: center;
+}
+
+/* ─── Saved Notes List ───────────────────────────────────────────── */
+.savedSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.savedTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--col-primary);
+  transition: color 0.6s ease;
+}
+
+.savedList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.savedNote {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid color-mix(in srgb, var(--col-primary) 12%, transparent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: border-color 0.4s ease;
+}
+
+.savedNoteHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.savedNoteDate {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--col-primary);
+  text-transform: uppercase;
+  transition: color 0.6s ease;
+}
+
+.savedNoteText {
+  font-size: 0.82rem;
+  color: var(--foreground);
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ─── Holiday List ───────────────────────────────────────────────── */
+.holidayList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.holidayItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-left: 4px solid;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease;
+}
+
+.holidayItem:hover { transform: translateX(3px); }
+
+.holidayDate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 32px;
+}
+
+.holidayDay {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--foreground);
+}
+
+.holidayDow {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+}
+
+.holidayInfo {
+  flex: 1;
+}
+
+.holidayName {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--foreground);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+
+.holidayType {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Holiday dot on calendar cell */
+.holidayDot {
+  position: absolute;
+  bottom: 4px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .wrapper {
+    flex-direction: column;
+    border-radius: 24px;
+  }
+
+  .hero {
+    width: 100%;
+    min-height: 300px;
+    max-height: 380px;
+  }
+
+  .heroMonth {
+    font-size: 3.5rem;
+  }
+
+  .heroContent {
+    bottom: 64px;
+    left: 24px;
+  }
+
+  .panel {
+    padding: 28px 24px 24px;
+    max-height: none;
+  }
+
+  .body {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .notesCol {
+    min-width: 0;
+  }
+
+  .navBtns {
+    bottom: 20px;
+    right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroMonth { font-size: 2.8rem; }
+  .panel { padding: 22px 16px 20px; }
+  .day { font-size: 0.8rem; }
+}
+

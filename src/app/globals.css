@@ -1,49 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ─── Season Tokens ─────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Spring */
+  --spring-primary:   #e8638c;
+  --spring-secondary: #f9d4e3;
+  --spring-accent:    #82c982;
+  --spring-bg-from:   #fff0f5;
+  --spring-bg-to:     #f6fff3;
+  --spring-text:      #6a1e3c;
+  --spring-glow:      rgba(232, 99, 140, 0.35);
+  --spring-range:     rgba(232, 99, 140, 0.12);
+
+  /* Summer */
+  --summer-primary:   #f7a000;
+  --summer-secondary: #ffe8b0;
+  --summer-accent:    #1ebfbd;
+  --summer-bg-from:   #fffbef;
+  --summer-bg-to:     #edfffe;
+  --summer-text:      #7a4500;
+  --summer-glow:      rgba(247, 160, 0, 0.35);
+  --summer-range:     rgba(247, 160, 0, 0.12);
+
+  /* Autumn */
+  --autumn-primary:   #c9521a;
+  --autumn-secondary: #fde3cf;
+  --autumn-accent:    #e0a020;
+  --autumn-bg-from:   #fff8f0;
+  --autumn-bg-to:     #fffbf0;
+  --autumn-text:      #5c2200;
+  --autumn-glow:      rgba(201, 82, 26, 0.35);
+  --autumn-range:     rgba(201, 82, 26, 0.12);
+
+  /* Winter */
+  --winter-primary:   #4a7fe8;
+  --winter-secondary: #d0e2fb;
+  --winter-accent:    #7cc0e8;
+  --winter-bg-from:   #eef3ff;
+  --winter-bg-to:     #eafaff;
+  --winter-text:      #1a2c60;
+  --winter-glow:      rgba(74, 127, 232, 0.35);
+  --winter-range:     rgba(74, 127, 232, 0.12);
+
+  /* Active season (JS sets [data-season] on :root) */
+  --col-primary:   var(--spring-primary);
+  --col-secondary: var(--spring-secondary);
+  --col-accent:    var(--spring-accent);
+  --col-bg-from:   var(--spring-bg-from);
+  --col-bg-to:     var(--spring-bg-to);
+  --col-text:      var(--spring-text);
+  --col-glow:      var(--spring-glow);
+  --col-range:     var(--spring-range);
+
+  --foreground: #1a1a2e;
+  --text-muted:  #94a3b8;
+  --card-white:  rgba(255,255,255,0.85);
+  --card-border: rgba(255,255,255,0.4);
+  --shadow-card: 0 25px 60px -15px rgba(0,0,0,0.18);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+[data-season="spring"] {
+  --col-primary:   var(--spring-primary);
+  --col-secondary: var(--spring-secondary);
+  --col-accent:    var(--spring-accent);
+  --col-bg-from:   var(--spring-bg-from);
+  --col-bg-to:     var(--spring-bg-to);
+  --col-text:      var(--spring-text);
+  --col-glow:      var(--spring-glow);
+  --col-range:     var(--spring-range);
+}
+[data-season="summer"] {
+  --col-primary:   var(--summer-primary);
+  --col-secondary: var(--summer-secondary);
+  --col-accent:    var(--summer-accent);
+  --col-bg-from:   var(--summer-bg-from);
+  --col-bg-to:     var(--summer-bg-to);
+  --col-text:      var(--summer-text);
+  --col-glow:      var(--summer-glow);
+  --col-range:     var(--summer-range);
+}
+[data-season="autumn"] {
+  --col-primary:   var(--autumn-primary);
+  --col-secondary: var(--autumn-secondary);
+  --col-accent:    var(--autumn-accent);
+  --col-bg-from:   var(--autumn-bg-from);
+  --col-bg-to:     var(--autumn-bg-to);
+  --col-text:      var(--autumn-text);
+  --col-glow:      var(--autumn-glow);
+  --col-range:     var(--autumn-range);
+}
+[data-season="winter"] {
+  --col-primary:   var(--winter-primary);
+  --col-secondary: var(--winter-secondary);
+  --col-accent:    var(--winter-accent);
+  --col-bg-from:   var(--winter-bg-from);
+  --col-bg-to:     var(--winter-bg-to);
+  --col-text:      var(--winter-text);
+  --col-glow:      var(--winter-glow);
+  --col-range:     var(--winter-range);
 }
 
-html {
-  height: 100%;
-}
+/* ─── Reset & Base ───────────────────────────────────────────────── */
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
+*, *::before, *::after {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+html { font-family: 'Inter', sans-serif; }
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--col-bg-from) 0%, var(--col-bg-to) 100%);
+  color: var(--foreground);
+  transition: background 0.8s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* ─── Keyframes ──────────────────────────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(18px); }
+  to   { opacity:1; transform:translateY(0);    }
+}
+@keyframes scaleIn {
+  from { opacity:0; transform:scale(0.92); }
+  to   { opacity:1; transform:scale(1);    }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.animate-fade-up  { animation: fadeUp  0.6s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-scale-in { animation: scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* ─── Particle Canvas (seasonal floating elements) ───────────────── */
+#season-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Main layout wrapper ────────────────────────────────────────── */
+main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1180px;
 }
