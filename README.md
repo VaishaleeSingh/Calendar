@@ -1,50 +1,58 @@
-# Aura Calendar - Premium Wall Calendar Component
+# 🌸 Aura Seasonal Planner | Premium Next.js Calendar
 
-A highly interactive, React-based web component inspired by physical wall calendars. Built for responsiveness and a premium user experience.
+Aura is a high-end, responsive seasonal calendar component built with Next.js and vanilla CSS modules. It mimics the aesthetic of a physical premium wall calendar, offering a dynamic user experience that shifts its visual identity, imagery, and ambient effects based on the current month and season.
 
-## ✨ Features
+![Calendar Showcase](https://github.com/VaishaleeSingh/Calendar/raw/master/public/assets/spring.png)
 
-- **Wall Calendar Aesthetic**: Prominent hero image (dynamic per month) serving as a visual anchor.
-- **Day Range Selector**: Click to select a start date and an end date. The range is visually highlighted across the grid.
-- **Integrated Notes**:
-  - **Monthly Memo**: A general notes section for overall monthly goals.
-  - **Date-Specific Notes**: Attach detailed notes to specific dates or your selected range.
-- **Persistence**: Notes are automatically saved to `localStorage`.
-- **Animations**: Smooth "flipping" transitions between months and interactive hover effects using Framer Motion.
-- **Fully Responsive**: Graceful transition between desktop (side-by-side) and mobile (stacked) layouts.
-- **Modern Tech Stack**: React (Next.js), Vanilla CSS Modules, Lucide Icons, Date-fns.
+## 🎨 Key Features
 
-## 🛠 Tech Stack
+### 1. Dynamic Seasonal Design System
+The entire UI automatically adapts to the four seasons (Spring, Summer, Autumn, Winter).
+- **Seasonal Hero Imagery**: High-quality, AI-generated seasonal hero images for each period.
+- **28+ CSS Color Tokens**: Gradients, glows, highlights, and text colors update dynamically via data-attributes.
+- **Ambient Particle Canvas**: Animated floating elements (butterflies/blossoms for Spring, snowflakes for Winter, etc.) using HTML5 Canvas API.
 
+### 2. Comprehensive Navigation & Utilities
+- **Month/Year Dropdowns**: Quick navigation through a sleek custom dropdown system.
+- **Real-Time Weather Context**: Live-updating situational weather labels per season.
+- **Sunday Holiday Highlights**: Sundays are visually distinct with a soft coral-red tint across both the column header and the date grid.
+- **Today Marker**: A pulsing dot under the current day for instant orientation.
+
+### 3. Smart Information Management
+- **Holiday Database**: Built-in, year-specific holidays for 2024–2026 (Indian National, Regional, and International).
+- **Persistent Note-Taking**: LocalStorage-based storage for both Monthly Memos and Day-Specific Notes.
+- **Persistent Notes List**: A sidebar list that shows all your saved notes globally, allowing you to edit or delete any record at once.
+- **Interactive Range Selection**: Two-click range selection with hover-previews and specialized start/end animations.
+
+### 4. Technical Architecture
 - **Framework**: Next.js 15 (App Router)
-- **Language**: JavaScript
-- **Styling**: Vanilla CSS Modules (no Tailwind for maximum design control)
-- **Icons**: Lucide React
-- **Animations**: Framer Motion
-- **Date Handling**: date-fns
+- **Styling**: Vanilla CSS Modules (No Tailwind, maximum design precision)
+- **Animation**: Framer Motion for hero transitions and layout shifts
+- **Date Management**: date-fns for robust calendar logic
+- **Icons**: Lucide React for consistent iconography
 
 ## 🚀 Getting Started
 
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+### Installation
+```bash
+npm install
+```
 
-2. **Run the development server**:
-   ```bash
-   npm run dev
-   ```
+### Running Locally
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-3. **Open the app**:
-   Navigate to [http://localhost:3000](http://localhost:3000) to view the component.
+## 🏗 Project Structure
+- `src/components/Calendar/`: Core folder containing `Calendar.js` logic and `Calendar.module.css` local styles.
+- `src/app/globals.css`: Contains the seasonal CSS variables and root design tokens.
+- `public/assets/`: Seasonal hero images (spring.png, summer.png, etc.).
 
-## 📁 Project Structure
+## 📱 Responsive Layout
+The Aura Calendar is fully responsive:
+- **Desktop (1024px+)**: Side-by-side view with a hero on the left and input grid/notes on the right.
+- **Mobile (< 1024px)**: Elegant vertical stack ensuring touch-friendly interactions on smaller viewports.
 
-- `src/components/Calendar`: Main component logic and styling.
-- `src/lib/utils.js`: Utility functions.
-- `public/assets`: Hero images and static assets.
-- `src/app/globals.css`: Global design tokens and resets.
-
-## 🎨 Design Philosophy
-
-The Aura Calendar brand focuses on "serenity and productivity." The UI uses muted gradients, glassmorphism, and a high-contrast date grid to ensure that while the aesthetics are "premium," the functional utility of the calendar remains the top priority.
+---
+Built with ❤️ by [Vaishalee Singh](https://github.com/VaishaleeSingh)
