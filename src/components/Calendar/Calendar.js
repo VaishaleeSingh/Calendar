@@ -499,16 +499,10 @@ export default function Calendar() {
               {/* Holiday legend */}
               <div className={styles.legendRow}>
                 <span className={styles.legendItem}>
-                  <span className={styles.legendDot} style={{background:'#e8638c'}}/> National
+                  <span className={styles.legendDot} style={{background:'var(--col-accent)'}}/> Personal Note
                 </span>
                 <span className={styles.legendItem}>
-                  <span className={styles.legendDot} style={{background:'#f7a000'}}/> India
-                </span>
-                <span className={styles.legendItem}>
-                  <span className={styles.legendDot} style={{background:'#4a7fe8'}}/> International
-                </span>
-                <span className={styles.legendItem}>
-                  <span className={styles.legendDot} style={{background:'var(--col-accent)'}}/> Note
+                  <span className={styles.legendDot} style={{background:'#4a7fe8'}}/> Calendar Event
                 </span>
               </div>
             </div>
