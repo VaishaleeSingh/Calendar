@@ -43,101 +43,11 @@ const SEASONS = {
   },
 };
 
-// ─── Holidays (MM-DD keyed, covers India + international) ─────────
-const FIXED_HOLIDAYS = {
-  '01-01': { name: "New Year's Day", type: 'international' },
-  '01-14': { name: 'Makar Sankranti', type: 'india' },
-  '01-23': { name: 'Netaji Birthday', type: 'india' },
-  '01-26': { name: 'Republic Day 🇮🇳', type: 'national' },
-  '02-14': { name: "Valentine's Day", type: 'international' },
-  '02-19': { name: 'Chhatrapati Shivaji Maharaj Jayanti', type: 'india' },
-  '03-08': { name: "International Women's Day", type: 'international' },
-  '04-14': { name: 'Dr. Ambedkar Jayanti', type: 'national' },
-  '04-22': { name: 'Earth Day 🌍', type: 'international' },
-  '05-01': { name: 'Labour Day / Maharashtra Day', type: 'national' },
-  '05-11': { name: "Mother's Day", type: 'international' },
-  '06-05': { name: 'World Environment Day 🌿', type: 'international' },
-  '06-21': { name: "Father's Day", type: 'international' },
-  '07-04': { name: 'Independence Day (US) 🇺🇸', type: 'international' },
-  '08-15': { name: 'Independence Day 🇮🇳', type: 'national' },
-  '09-05': { name: "Teachers' Day", type: 'india' },
-  '10-02': { name: 'Gandhi Jayanti', type: 'national' },
-  '10-31': { name: 'Halloween 🎃', type: 'international' },
-  '11-01': { name: 'All Saints Day', type: 'international' },
-  '11-14': { name: "Children's Day", type: 'india' },
-  '12-25': { name: 'Christmas Day 🎄', type: 'national' },
-  '12-31': { name: "New Year's Eve 🎆", type: 'international' },
-};
+// Holidays are now fetched dynamically from Google Calendar API.
 
-// Year-specific variable holidays (Easter, Diwali, Holi, Eid etc.)
-const VARIABLE_HOLIDAYS = {
-  2024: {
-    '01-15': { name: 'Pongal', type: 'india' },
-    '02-24': { name: 'Maha Shivaratri', type: 'india' },
-    '03-25': { name: 'Holi 🌈', type: 'national' },
-    '03-29': { name: 'Good Friday ✝️', type: 'national' },
-    '04-10': { name: 'Eid ul-Fitr 🌙', type: 'national' },
-    '04-14': { name: 'Ram Navami', type: 'india' },
-    '04-17': { name: 'Hanuman Jayanti', type: 'india' },
-    '04-21': { name: 'Easter Sunday', type: 'international' },
-    '06-17': { name: 'Eid al-Adha 🐑', type: 'national' },
-    '07-17': { name: 'Muharram', type: 'national' },
-    '08-07': { name: 'Raksha Bandhan', type: 'india' },
-    '08-19': { name: 'Janmashtami', type: 'india' },
-    '09-16': { name: 'Milad-un-Nabi', type: 'national' },
-    '10-13': { name: 'Dussehra', type: 'national' },
-    '11-01': { name: 'Diwali 🪔', type: 'national' },
-    '11-15': { name: 'Guru Nanak Jayanti', type: 'national' },
-    '11-26': { name: 'Thanksgiving 🦃', type: 'international' },
-  },
-  2025: {
-    '01-14': { name: 'Pongal / Makar Sankranti', type: 'india' },
-    '02-26': { name: 'Maha Shivaratri', type: 'india' },
-    '03-14': { name: 'Holi 🌈', type: 'national' },
-    '03-30': { name: 'Ram Navami', type: 'india' },
-    '04-10': { name: 'Mahavir Jayanti', type: 'national' },
-    '04-18': { name: 'Good Friday ✝️', type: 'national' },
-    '04-20': { name: 'Easter Sunday', type: 'international' },
-    '03-31': { name: 'Eid ul-Fitr 🌙', type: 'national' },
-    '06-07': { name: 'Eid al-Adha 🐑', type: 'national' },
-    '07-06': { name: 'Muharram', type: 'national' },
-    '08-05': { name: 'Raksha Bandhan', type: 'india' },
-    '08-16': { name: 'Janmashtami', type: 'india' },
-    '09-05': { name: 'Milad-un-Nabi', type: 'national' },
-    '10-02': { name: 'Dussehra', type: 'national' },
-    '10-20': { name: 'Diwali 🪔', type: 'national' },
-    '11-05': { name: 'Guru Nanak Jayanti', type: 'national' },
-    '11-27': { name: 'Thanksgiving 🦃', type: 'international' },
-  },
-  2026: {
-    '01-14': { name: 'Makar Sankranti', type: 'india' },
-    '02-15': { name: 'Maha Shivaratri', type: 'india' },
-    '03-03': { name: 'Holi 🌈', type: 'national' },
-    '03-17': { name: 'Eid ul-Fitr 🌙', type: 'national' },
-    '03-29': { name: 'Ram Navami', type: 'india' },
-    '04-02': { name: 'Good Friday ✝️', type: 'national' },
-    '04-05': { name: 'Easter Sunday', type: 'international' },
-    '04-23': { name: 'Mahavir Jayanti', type: 'national' },
-    '05-24': { name: 'Eid al-Adha 🐑', type: 'national' },
-    '06-14': { name: 'Muharram', type: 'national' },
-    '07-25': { name: 'Janmashtami', type: 'india' },
-    '08-03': { name: 'Raksha Bandhan', type: 'india' },
-    '08-24': { name: 'Milad-un-Nabi', type: 'national' },
-    '09-19': { name: 'Dussehra', type: 'national' },
-    '11-08': { name: 'Diwali 🪔', type: 'national' },
-    '11-25': { name: 'Guru Nanak Jayanti', type: 'national' },
-    '11-26': { name: 'Thanksgiving 🦃', type: 'international' },
-  },
-};
-
-const getHoliday = (date) => {
-  const year = date.getFullYear();
-  const mmdd = format(date, 'MM-dd');
-  return (
-    (VARIABLE_HOLIDAYS[year] && VARIABLE_HOLIDAYS[year][mmdd]) ||
-    FIXED_HOLIDAYS[mmdd] ||
-    null
-  );
+const getHoliday = (date, apiHolidays = {}) => {
+  const yyyymmdd = format(date, 'yyyy-MM-dd');
+  return apiHolidays[yyyymmdd] || null;
 };
 
 const HOLIDAY_COLORS = {
@@ -262,6 +172,62 @@ export default function Calendar() {
   // notes[YYYY-MM-DD] = string  |  notes[YYYY-MM-memo] = string
   const [notes, setNotes]       = useState({});
   const [activeTab, setActiveTab] = useState('notes'); // 'notes' | 'holidays'
+  const [apiHolidays, setApiHolidays] = useState({});
+  const [isLoadingHolidays, setIsLoadingHolidays] = useState(false);
+
+  // ── Google Calendar API Integration ───────────────────────────
+  const fetchedYears = useRef(new Set());
+
+  useEffect(() => {
+    const fetchGoogleHolidays = async () => {
+      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+      const calendarId = process.env.NEXT_PUBLIC_CALENDAR_ID || 'vaishalisinghsln5@gmail.com';
+
+      if (!apiKey || apiKey === 'YOUR_GOOGLE_API_KEY_HERE') {
+        return;
+      }
+
+      const year = current.getFullYear();
+      // Simple cache check to avoid redundant API hits for the same year
+      if (fetchedYears.current.has(year)) {
+        return;
+      }
+
+      setIsLoadingHolidays(true);
+      try {
+        // Fetch events for the current year
+        const timeMin = new Date(year, 0, 1).toISOString();
+        const timeMax = new Date(year, 11, 31, 23, 59, 59).toISOString();
+        
+        const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events?key=${apiKey}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=true&orderBy=startTime`;
+        
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.items) {
+          const mapped = {};
+          data.items.forEach(ev => {
+            const dateStr = ev.start.date || ev.start.dateTime.split('T')[0];
+            // Format for getHoliday consistency
+            mapped[dateStr] = {
+              name: ev.summary,
+              type: ev.description?.toLowerCase().includes('national') ? 'national' : 'international',
+              isApi: true
+            };
+          });
+          
+          setApiHolidays(prev => ({ ...prev, ...mapped }));
+          fetchedYears.current.add(year);
+        }
+      } catch (err) {
+        console.error('Error fetching calendar events:', err);
+      } finally {
+        setIsLoadingHolidays(false);
+      }
+    };
+
+    fetchGoogleHolidays();
+  }, [current.getFullYear()]);
 
   // ── Persist ────────────────────────────────────────────────────
   useEffect(() => {
@@ -473,7 +439,7 @@ export default function Calendar() {
                 {days.map((day) => {
                   const nk      = dayKey(day);
                   const hasNote = !!notes[nk];
-                  const holiday = getHoliday(day);
+                  const holiday = getHoliday(day, apiHolidays);
                   const sel     = isStart(day) || isEnd(day);
                   const inCur   = isSameMonth(day, monthStart);
 
@@ -661,7 +627,7 @@ export default function Calendar() {
                     const mo = current.getMonth();
                     const monthHolidays = days
                       .filter(d => isSameMonth(d, monthStart))
-                      .map(d => ({ date: d, holiday: getHoliday(d) }))
+                      .map(d => ({ date: d, holiday: getHoliday(d, apiHolidays) }))
                       .filter(({ holiday }) => holiday);
 
                     return monthHolidays.length > 0 ? (
